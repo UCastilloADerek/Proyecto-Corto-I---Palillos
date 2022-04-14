@@ -13,15 +13,6 @@ void repeat(char c, int count)
 
 void printInventory(int source[3][7])
 {
-
-//(no se donde se pone no encuentro el in main jajaja)
-//str jugador1, jugador2;
-
-//Printf("Jugador 1 bienvenido ingresa tu nombre --: ");
-//Scanf("%s \n", &jugador1);
-
-//Printf("Jugador 2 bienvenido ingresa tu nombre --: ");
-//Scanf("%s \n", &jugador2);
   //Aesthetic
   putchar('+');
   repeat('-', 17);
@@ -126,7 +117,15 @@ void main()
        {1, 1, 1, 1, 1, NULL, NULL},
     {1, 1, 1, 1, 1, 1, 1}
   };
+  
+  int score[2];
+  char player1[50], player2[50];
+  printf("Ingrese nombre jugador 1\n>");
+  scanf("%s", &player1);
+  printf("Ingrese nombre jugador 2\n>");
+  scanf("%s", &player2);
 
+  int activePlayer = 1;
   int currentRow;
   int selection;
   while(checkInventory(inventory))
@@ -151,5 +150,5 @@ void main()
     scanf("%i", &selection);
   }
   printf("The game has ended");
-  return 0;
+  return;
 }
