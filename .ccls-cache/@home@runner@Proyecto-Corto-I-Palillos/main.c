@@ -147,7 +147,6 @@ void main()
 
   int score[2] = {0, 0}; //Vector para punteo
   int activePlayer = 1; //Jugador activo
-  int invert; //Jugador inactivo
   int currentRow; //Fila seleccionada
   int turn = 1; //Turno actual
   int selectionQuantity; //Cantidad de palillos a elegir
@@ -190,7 +189,7 @@ void main()
           printf("Elija palillo a retir\n>");
           scanf("%i", &selection);
 
-          //Valida que seleccion este dentro de sus limites y este disponible
+          //Valida que seleccion este dentro de los limites de la fila y este disponible el palillo
           if (selection <= 3 + 2 * (currentRow - 1) && inventory[currentRow - 1][selection - 1] == 1)
           {
             inventory[currentRow - 1][selection - 1] = 0;
@@ -200,12 +199,10 @@ void main()
         if (activePlayer == 1)
         {
           activePlayer = 2;
-          invert = 1;
         }
         else
         {
           activePlayer = 1;
-          invert = 2;
         }
         turn++;
       }
@@ -215,7 +212,7 @@ void main()
   //Sistema de punteo
   if(inventoryQuantity(inventory, currentRow - 1) == 1)
   {
-    score[invert - 1] += 3;
+    score[(activePlayer == 0 ? 1 : 0)] += 3;
   }
   else
   {
