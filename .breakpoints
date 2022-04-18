@@ -2,22 +2,10 @@
   "files": {
     "main.c": [
       {
-        "id": "28ac730e-e226-4cef-8548-ff9c46bcae91",
-        "line": 213,
-        "version": 6308,
-        "index": 4597
-      },
-      {
-        "id": "d50da83d-9d68-40d1-ad1e-1c8850d414ad",
-        "line": 215,
-        "version": 6308,
-        "index": 4664
-      },
-      {
-        "id": "0ae032bd-e3bc-4353-b842-7f789cf7f8bc",
-        "line": 220,
-        "version": 6308,
-        "index": 4732
+        "id": "c2bc0677-45a7-43f8-8606-f32bbd524126",
+        "line": 114,
+        "version": 8240,
+        "index": 1928
       }
     ]
   }
