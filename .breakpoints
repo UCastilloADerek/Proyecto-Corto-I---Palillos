@@ -3,21 +3,15 @@
     "main.c": [
       {
         "id": "da471ab5-6c7c-412d-a644-fdf179533025",
-        "line": 156,
-        "version": 8240,
-        "index": 2892
+        "line": 4,
+        "version": 8386,
+        "index": 60
       },
       {
         "id": "fcf7956d-dcaa-4070-9fd9-d58e1129a615",
-        "line": 239,
-        "version": 8240,
-        "index": 5379
-      },
-      {
-        "id": "2aeae0a0-58b3-4f0f-a948-012ef658bf82",
-        "line": 252,
-        "version": 8240,
-        "index": 5583
+        "line": 4,
+        "version": 8386,
+        "index": 60
       }
     ]
   }

@@ -242,20 +242,20 @@ void main()
     }
     activePlayer = 1;
     turn = 1;
-    
-    char input[2];
-    printf("¿Desea jugar de nuevo? (Y/N)\n>");
-    scanf("%s", &input);
 
-    if (strcmp(input, "N") == 0)
+      //Imprime datos finales del juego
+  printf("\nPunteos:\n%s: %i\n%s: %i\n", playerRoster[0], score[0], playerRoster[1], score[1]);
+    char input[2];
+    printf("\n¿Desea jugar de nuevo? (Y/N)\n>");
+    scanf("%s", &input);
+    
+    
+    if (strcasecmp(input, "N") == 0)
     {
       continueGame = false;
     }
     
   } while (continueGame);
-
-  //Imprime datos finales del juego
-  printf("El juego termino\nPunteos:\n%s: %i\n%s: %i\n", playerRoster[0], score[0], playerRoster[1], score[1]);
 
   int winner;
   if (score[0] > score[1])
@@ -270,7 +270,7 @@ void main()
   {
     winner = 2;
   }
-
+  
   printf("Ganador: %s", (winner != 2 ? playerRoster[winner]: "Empate"));
   return;
 }
