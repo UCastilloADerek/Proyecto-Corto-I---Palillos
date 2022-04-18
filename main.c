@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
 //Para repetir un caracter
 void repeat(char c, int count)
@@ -239,12 +240,14 @@ void main()
         inventory[i][j] = 1;
       }
     }
+    activePlayer = 1;
+    turn = 1;
     
-    char input;
+    char input[2];
     printf("¿Desea jugar de nuevo? (Y/N)\n>");
-    scanf("%c", &input);
+    scanf("%s", &input);
 
-    if (input == 'N')
+    if (strcmp(input, "N") == 0)
     {
       continueGame = false;
     }
