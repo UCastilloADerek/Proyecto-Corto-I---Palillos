@@ -143,8 +143,6 @@ void main()
   scanf("%s", &player2);
   strncpy(playerRoster[1], player2, 50);
 
-  bool continueGame = true;
-  int score[2] = {0, 0}; //Vector para punteo
   int activePlayer = 1; //Jugador activo
   int currentRow; //Fila seleccionada
   int turn = 1; //Turno actual
@@ -152,49 +150,47 @@ void main()
   int selection; //Seleccion de entidades para sistema de eleccion - Pendiente
 
   //Ciclo para turnos
-  do
+  while(checkInventory(inventory))
   {
-    while(checkInventory(inventory))
-    {
-      //Imprime datos del juego
-      system("clear");
-      printInventory(inventory);
-      printf("Jugador actual: %s\n", playerRoster[activePlayer - 1]);
+    //Imprime datos del juego
+    system("clear");
+    printInventory(inventory);
+    printf("Jugador actual: %s\n", playerRoster[activePlayer - 1]);
       printf("Turno actual: %i\n", turn);
-      for(int i = 0; i < 3; i++)
+    for(int i = 0; i < 3; i++)
+    {
+      if (checkInventoryRow(inventory, i))
       {
-        if (checkInventoryRow(inventory, i))
+        printf("Row %i disponible\n", i + 1);
+      }
+      else
+      {
+        printf("Row %i vacio\n", i + 1);
+      }
+    }
+    printf("Elija una fila disponible\n>");
+    scanf("%i", &currentRow);
+
+    //Valida si la fila seleccionada esta vacia y este dentro de sus limites
+    if (currentRow <= 3 && currentRow >= 1 && checkInventoryRow(inventory, currentRow - 1))
+    {
+      printf("Palillos disponibles: "); printRow(inventory, currentRow - 1);
+      printf("Escoger cantidad de palillos\n>");
+      scanf("%i", &selectionQuantity);
+
+      //Sistema de eleccion de palillos: No mayor de la cantidad disponible
+      if (selectionQuantity <= inventoryQuantity(inventory, currentRow - 1))
+      {
+        //Valida si la cantidad a retirar es igual a la cantidad restante
+        if (selectionQuantity == inventoryQuantity(inventory, currentRow - 1))
         {
-           printf("Row %i disponible\n", i + 1);
-         }
+          for(int j = 0; j < 3 + 2 * (currentRow - 1); j++)
+          {
+            inventory[currentRow - 1][j] = 0;
+          }
+        }
         else
         {
-          printf("Row %i vacio\n", i + 1);
-        }
-      }
-      printf("Elija una fila disponible\n>");
-      scanf("%i", &currentRow);
-
-      //Valida si la fila seleccionada esta vacia y este dentro de sus limites
-      if (currentRow <= 3 && currentRow >= 1 && checkInventoryRow(inventory, currentRow - 1))
-      {
-        printf("Palillos disponibles: "); printRow(inventory, currentRow - 1);
-        printf("Escoger cantidad de palillos\n>");
-        scanf("%i", &selectionQuantity);
-
-        //Sistema de eleccion de palillos: No mayor de la cantidad disponible
-        if (selectionQuantity <= inventoryQuantity(inventory, currentRow - 1))
-        {
-          //Valida si la cantidad a retirar es igual a la cantidad restante
-          if (selectionQuantity == inventoryQuantity(inventory, currentRow - 1))
-          {
-            for(int j = 0; j < 3 + 2 * (currentRow - 1); j++)
-            {
-              inventory[currentRow - 1][j] = 0;
-            }
-          }
-          else
-          {
             for(int i = 0; i < selectionQuantity; i++)  
             {
               printf("Elija palillo a retirar\n>");
@@ -208,69 +204,9 @@ void main()
             }
           }
           //Cambia jugador activo para el siguiente turno
-          if (activePlayer == 1)
-          {
-            activePlayer = 2;
-          }
-          else
-          {
-            activePlayer = 1;
-          }
+          activePlayer = activePlayer == 1 ? 2 : 1;
           turn++;
         }
       }
     }
-    
-    //Sistema de punteo
-    if(inventoryQuantity(inventory, currentRow - 1) == 1)
-    {
-      score[(activePlayer == 0 ? 1 : 0)] += 3;
-    }
-    else
-    {
-      score[0] += 1;
-      score[1] += 1;
-    }
-
-    //Reseteo
-    for(int i = 0; i < 3; i++)
-    {
-      for(int j = 0; j < 3 + 2 * i; j++)
-      {
-        inventory[i][j] = 1;
-      }
-    }
-    activePlayer = 1;
-    turn = 1;
-
-      //Imprime datos finales del juego
-  printf("\nPunteos:\n%s: %i\n%s: %i\n", playerRoster[0], score[0], playerRoster[1], score[1]);
-    char input[2];
-    printf("\n¿Desea jugar de nuevo? (Y/N)\n>");
-    scanf("%s", &input);
-    
-    
-    if (strcasecmp(input, "N") == 0)
-    {
-      continueGame = false;
-    }
-    
-  } while (continueGame);
-
-  int winner;
-  if (score[0] > score[1])
-  {
-    winner = 0;
   }
-  else if(score[1] > score[0])
-  {
-    winner = 1;
-  }
-  else
-  {
-    winner = 2;
-  }
-  
-  printf("Ganador: %s", (winner != 2 ? playerRoster[winner]: "Empate"));
-  return;
-}
