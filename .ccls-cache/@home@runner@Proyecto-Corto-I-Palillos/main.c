@@ -208,14 +208,7 @@ void main()
             }
           }
           //Cambia jugador activo para el siguiente turno
-          if (activePlayer == 1)
-          {
-            activePlayer = 2;
-          }
-          else
-          {
-            activePlayer = 1;
-          }
+          activePlayer = activePlayer == 1 ? 2 : 1;
           turn++;
         }
       }
