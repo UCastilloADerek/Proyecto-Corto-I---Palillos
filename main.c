@@ -160,16 +160,12 @@ void main()
       system("clear");
       printInventory(inventory);
       printf("Jugador actual: %s\n", playerRoster[activePlayer - 1]);
-      printf("Turno actual: %i\n", turn);
+      printf("Turno actual: %i\nFilas disponibles:\n", turn);
       for(int i = 0; i < 3; i++)
       {
         if (checkInventoryRow(inventory, i))
         {
-           printf("Row %i disponible\n", i + 1);
-         }
-        else
-        {
-          printf("Row %i vacio\n", i + 1);
+           printf("Fila %i\n", i + 1);
         }
       }
       printf("Elija una fila disponible\n>");
@@ -200,20 +196,19 @@ void main()
               printf("Elija palillo a retirar\n>");
               scanf("%i", &selection);
 
-              //Valida que seleccion este dentro de los limites de la fila y este disponible el palillo
-              if (selection <= 3 + 2 * (currentRow - 1) && inventory[currentRow - 1][selection - 1] == 1)
-              {
-                inventory[currentRow - 1][selection - 1] = 0;
-              }
+            //Valida que seleccion este dentro de los limites de la fila y este disponible el palillo
+            if (selection <= 3 + 2 * (currentRow - 1) && inventory[currentRow - 1][selection - 1] == 1)
+            {
+              inventory[currentRow - 1][selection - 1] = 0;
             }
           }
-          //Cambia jugador activo para el siguiente turno
-          activePlayer = activePlayer == 1 ? 2 : 1;
-          turn++;
+        }
+        //Cambia jugador activo para el siguiente turno
+        activePlayer = activePlayer == 1 ? 2 : 1;
+        turn++;
         }
       }
-    }
-    
+    }  
     //Sistema de punteo
     if(inventoryQuantity(inventory, currentRow - 1) == 1)
     {
@@ -236,8 +231,8 @@ void main()
     activePlayer = 1;
     turn = 1;
 
-      //Imprime datos finales del juego
-  printf("\nPunteos:\n%s: %i\n%s: %i\n", playerRoster[0], score[0], playerRoster[1], score[1]);
+    //Imprime datos finales del juego
+    printf("\nPunteos:\n%s: %i\n%s: %i\n", playerRoster[0], score[0], playerRoster[1], score[1]);
     char input[2];
     printf("\n¿Desea jugar de nuevo? (Y/N)\n>");
     scanf("%s", &input);
@@ -247,7 +242,6 @@ void main()
     {
       continueGame = false;
     }
-    
   } while (continueGame);
 
   int winner;
